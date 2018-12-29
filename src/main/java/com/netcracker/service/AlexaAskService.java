@@ -1,6 +1,5 @@
 package com.netcracker.service;
 
-import com.netcracker.handlers.MainHandler;
 import com.netcracker.model.Constant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,8 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AlexaAskService {
 
@@ -31,10 +28,10 @@ public class AlexaAskService {
     }
 
     private static String sendRequest(String message) throws IOException {
-        URL url = new URL(Constant.SERVER_URL);
+        URL url = new URL(Constant.SERVER_HANDLE_URL);
         byte[] postDataBytes = transformPostData(message);
 
-        logger.info("Open connection on url = {}", Constant.SERVER_URL);
+        logger.info("Open connection on url = {}", Constant.SERVER_HANDLE_URL);
         HttpURLConnection alexaConnection = (HttpURLConnection)url.openConnection();
 
         alexaConnection.setRequestMethod("POST");
@@ -68,5 +65,18 @@ public class AlexaAskService {
         logger.info("Close connection");
 
         return result.toString();
+    }
+
+    public static void sendCommandToOpenStartPage() {
+        try {
+            URL url = new URL(Constant.SERVER_START_PAGE_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            int responseCode = connection.getResponseCode();
+            logger.info("Sending 'GET' request to URL: {}", Constant.SERVER_START_PAGE_URL);
+            logger.info("Response Code: {}", responseCode);
+        } catch (IOException e) {
+            logger.info("Can't send command to go on start page: {}", e.getMessage());
+        }
     }
 }
