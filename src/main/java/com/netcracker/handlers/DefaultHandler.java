@@ -25,7 +25,8 @@ public class DefaultHandler implements RequestHandler {
 
         logger.info("Handle in DefaultHandler, return START_MESSAGE: {}", Constant.START_MESSAGE);
 
-        AlexaAskService.sendCommandToOpenStartPage();
+        //it is action for sweden location (it show Sergey Kolesnik)
+        //AlexaAskService.sendCommandToOpenStartPage();
 
         return handlerInput.getResponseBuilder().withSpeech(speechText).withShouldEndSession(false).build();
     }

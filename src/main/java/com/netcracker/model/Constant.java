@@ -1,6 +1,9 @@
 package com.netcracker.model;
 
 public interface Constant {
+    //for sweden location (it show Sergey Kolesnik)
+    //String START_MESSAGE = "Voice biometrics have been confirmed. How may I help you, David?";
+
     String START_MESSAGE = "Welcome to Netcracker. How may I help you?";
 
     String EXIT_MESSAGE = "Good bye.";
